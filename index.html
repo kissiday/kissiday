@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiss Button</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffeaf3; /* extremely soft pink */
+        font-family: Arial, sans-serif;
+    }
+
+    /* Oval Button */
+    .kiss-btn {
+        padding: 18px 60px;
+        border-radius: 50px;
+        border: none;
+        background-color: #ff00a8; /* magenta */
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .kiss-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Modal Background */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Modal Box */
+    .modal-content {
+        position: relative;
+        background: black;
+        padding: 10px;
+        border: 6px solid white; /* stark white borders */
+        border-radius: 12px;
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .modal video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+    }
+
+    /* Close Button */
+    .close {
+        position: absolute;
+        top: -18px;
+        right: -18px;
+        background: white;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        text-align: center;
+        line-height: 36px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+</style>
+</head>
+
+<body>
+
+<button class="kiss-btn" onclick="openModal()">kiss</button>
+
+<div class="modal" id="videoModal">
+    <div class="modal-content">
+        <div class="close" onclick="closeModal()">×</div>
+        <video id="kissVideo" controls>
+            <source src="kiss.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<script>
+function openModal() {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("kissVideo");
+    modal.style.display = "flex";
+    video.play();
+}
+
+function closeModal() {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("kissVideo");
+    modal.style.display = "none";
+    video.pause();
+    video.currentTime = 0;
+}
+
+// Close modal if clicking outside content
+window.onclick = function(event) {
+    const modal = document.getElementById("videoModal");
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+</script>
+
+</body>
+</html>
